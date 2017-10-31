@@ -10,4 +10,8 @@ class Player
 	 def black_jack
 	 	@score == 21
 	 end
+
+	 def add_card(card)
+	 	@cards << card
+	 end
 end

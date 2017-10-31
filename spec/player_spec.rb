@@ -22,4 +22,12 @@ describe Player do
 		it 'returns true if cards total amount equals 21' do 
 			expect(subject.black_jack).to eq true
 		end
+
+	describe '#add_card' do 
+		it 'adds a card to the players hand' do 
+			subject.add_card(10)
+			expect(subject.cards).to eq [10,11,10]
+		end
+
+		end 
 end 
