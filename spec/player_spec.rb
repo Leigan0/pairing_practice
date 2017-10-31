@@ -1,10 +1,10 @@
 require 'player'
 
 describe Player do 
-	c1 = 10 
-	c2 = 11
-	
-	subject{Player.new(c1,c2)}
+	card1 = 10 
+	card2 = 11
+
+	subject{Player.new(card1,card2)}
 
 	describe 'Initialize' do 
 		it 'Player Initializes with two cards' do 
