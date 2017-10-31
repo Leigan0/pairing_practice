@@ -28,6 +28,17 @@ describe Player do
 			subject.add_card(10)
 			expect(subject.cards).to eq [10,11,10]
 		end
+	end 
 
-		end 
+	describe '#over_21' do 
+		it 'returns true if the card score is above 21' do 
+			subject.add_card(10)
+			expect(subject.over_21).to eq true
+		end
+
+		it 'returns false if the card score is below 21' do 
+			expect(subject.over_21).to eq false
+		end
+	end
+
 end 
