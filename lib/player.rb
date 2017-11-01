@@ -1,3 +1,5 @@
+require_relative 'card'
+
 class Player
 	attr_reader :cards
 
