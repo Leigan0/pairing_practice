@@ -12,4 +12,8 @@ class Game
 		@dealer = @player_class.new(@card_class.release_card, @card_class.release_card)	
 	end
 
+	def winner?
+		@player.black_jack || @dealer.black_jack
+	end
+
 end
