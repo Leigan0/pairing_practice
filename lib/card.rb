@@ -1,4 +1,4 @@
-class cards 
+class Card
 
 	attr_reader :deck
 

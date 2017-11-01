@@ -1,6 +1,8 @@
 require 'player'
 
 describe Player do 
+	let(:card_class){double :card_class}
+	let(:card){double :card}
 	card1 = 10 
 	card2 = 11
 
