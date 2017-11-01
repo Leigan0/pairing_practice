@@ -22,4 +22,8 @@ class Player
 	 def over_21
 	 	score > 21
 	 end
+
+	 def over_17
+	 	score > 17
+	 end
 end

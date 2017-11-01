@@ -43,4 +43,10 @@ describe Player do
 		end
 	end
 
+	describe '#over_17' do 
+		it 'returns true if players hand if over 17' do 
+			expect(subject.over_17).to eq true
+		end 
+	end
+
 end 
