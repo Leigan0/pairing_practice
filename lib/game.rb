@@ -16,4 +16,8 @@ class Game
 		@player.black_jack || @dealer.black_jack
 	end
 
+	def deal
+	 !@player.over_21 ? @player.add_card(@card_class.release_card) : 'fail' 
+	end
+
 end

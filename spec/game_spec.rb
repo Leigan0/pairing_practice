@@ -25,7 +25,7 @@ describe Game do
 		# 	expect(card_class).to receive(:release_card).and_return(:card)  
 		# end
 
-		#need to work on with prince 
+		#need to work on with prince - already initialized when tests run. 
 	end
 
 	describe '#winner?' do 
@@ -38,6 +38,16 @@ describe Game do
 			allow(player).to receive(:black_jack).and_return(false)
 			allow(dealer).to receive(:black_jack).and_return(false)
 			expect(subject.winner?).to eq false
+		end
+	end
+
+	describe '#deal' do 
+		context 'Player card total less than 17' do 
+			it 'should deal another card to players hand' do 
+				allow(player).to receive(:over_21).and_return(false)
+				expect(player).to receive(:add_card)
+				subject.deal
+			end
 		end
 	end
 
