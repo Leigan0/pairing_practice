@@ -41,7 +41,6 @@ describe Game do
 			end
 		end
 
-
 		context 'Player card total more than 17, dealers hand less than players' do 
 			it 'should deal another card to dealers hand' do
 				allow(player).to receive(:over_limit).and_return(true)
@@ -59,11 +58,20 @@ describe Game do
 	describe '#dealers_move' do 
 		it 'deals a card to dealer if their total score is less than players' do
 			allow(player).to receive(:score).and_return(18)
+			allow(dealer).to receive(:score).and_return(15)
+			expect(dealer).to receive(:add_card)
+			subject.dealers_move
 		end
+
+		it 'raises error message when dealers total score is more than players' do 
+			allow(player).to receive(:score).and_return(18)
+			allow(dealer).to receive(:score).and_return(20)
+			expect{ subject.dealers_move }.to raise_error(RuntimeError, "Dealers hand exceeds players")
+		end 
 	end
 
 	describe '#game_over?' do 
-		it ' if player either over blackjack limit returns true' do 
+		it 'if player either over blackjack limit returns true' do 
 			allow(player).to receive(:score).and_return(22)
 			expect(subject.game_over?).to eq true
 		end

@@ -24,6 +24,9 @@ class Game
 		@player.score > BLACKJACK || @dealer.score > BLACKJACK
 	end
 
-
+	def dealers_move
+		fail "Dealers hand exceeds players" if @player.score < @dealer.score
+		@dealer.add_card(@card_class.release_card)
+	end
 
 end
