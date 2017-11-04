@@ -28,12 +28,12 @@ describe Game do
 
 	describe '#winner?' do 
 		it 'returns true if either player has blackjack' do 
-			allow(player).to receive(:black_jack).and_return(true)
+			allow(player).to receive(:score).and_return(21)
 			expect(subject.winner?).to eq true
 		end
 
 		it 'returns false both either players does not have blackjack' do 
-			allow(player).to receive(:black_jack).and_return(false)
+			allow(player).to receive(:score).and_return(18)
 			expect(subject.winner?).to eq false
 		end
 	end
@@ -62,15 +62,14 @@ describe Game do
 
 	describe '#game_over?' do 
 		it 'player either over blackjack limit returns true' do 
-			allow(player).to receive(:over_black_jack).and_return(true)
+			allow(player).to receive(:score).and_return(22)
 			expect(subject.game_over?).to eq true
 		end
 
 		it 'player either over blackjack limit returns true' do 
-			allow(player).to receive(:over_black_jack).and_return(false)
+			allow(player).to receive(:score).and_return(18)
 			expect(subject.game_over?).to eq false
 		end
-		
 	end
 
 end

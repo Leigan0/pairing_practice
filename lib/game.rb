@@ -4,6 +4,7 @@ require_relative 'card'
 class Game 
 
 	attr_reader :player, :dealer, :card_class
+	BLACKJACK = 21 
 
 	def initialize(player_class, card_class)
 		@player_class = player_class
@@ -13,7 +14,7 @@ class Game
 	end
 
 	def winner?
-		@player.black_jack || @dealer.black_jack
+		@player.score == BLACKJACK || @dealer.score == BLACKJACK
 	end
 
 	def deal
@@ -21,7 +22,7 @@ class Game
 	end
 
 	def game_over?
-		@player.over_black_jack || @dealer.over_black_jack
+		@player.score > BLACKJACK || @dealer.score > BLACKJACK
 	end
 
 end

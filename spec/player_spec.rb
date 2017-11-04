@@ -20,28 +20,12 @@ describe Player do
 		end 
 	end 
 
-	describe '#black_jack?'
-		it 'returns true if cards total amount equals black jack score' do 
-			expect(subject.black_jack).to eq true
-		end
-
 	describe '#add_card' do 
 		it 'adds a card to the players hand' do 
 			subject.add_card(10)
 			expect(subject.cards).to eq [10,11,10]
 		end
 	end 
-
-	describe '#over_black_jack' do 
-		it 'returns true if the card score is above black jack score' do 
-			subject.add_card(10)
-			expect(subject.over_black_jack).to eq true
-		end
-
-		it 'returns false if the card score is below black jack score' do 
-			expect(subject.over_black_jack).to eq false
-		end
-	end
 
 	describe '#over_limit' do 
 		it 'returns true if players hand is over set limit' do 
