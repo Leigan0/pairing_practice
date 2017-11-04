@@ -17,7 +17,7 @@ class Game
 	end
 
 	def deal
-	 !@player.over_21 ? @player.add_card(@card_class.release_card) : 'fail' 
+		@player.over_limit ? @player.add_card(@card_class.release_card) : 'fail'
 	end
 
 end
