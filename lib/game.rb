@@ -12,11 +12,16 @@ class Game
 		@dealer = dealer
 	end
 
+	def deal_game
+		2.times{ @player.add_card(@card_class.release_card)
+		@dealer.add_card(@card_class.release_card)}
+	end
+
 	def blackjack?
 		@player.score == BLACKJACK || @dealer.score == BLACKJACK
 	end
 
-	def deal
+	def play_on
 		@player.over_limit ? dealers_move : @player.add_card(@card_class.release_card)
 	end
 
@@ -28,5 +33,8 @@ class Game
 		fail "Dealers hand exceeds players" if @player.score < @dealer.score
 		@dealer.add_card(@card_class.release_card)
 	end
+
+
+
 
 end

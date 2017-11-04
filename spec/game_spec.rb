@@ -18,6 +18,16 @@ describe Game do
 		end # do I need to check that game creates a new card(deck of cards - maybe need to rename) object?? 
 	end
 
+	describe '#deal_game' do 
+		it 'deals two cards to both player and dealer' do 
+			expect(subject.player).to receive(:add_card)
+			expect(subject.player).to receive(:add_card)
+			expect(subject.dealer).to receive(:add_card)
+			expect(subject.dealer).to receive(:add_card)
+			subject.deal_game
+		end
+	end
+
 	describe '#blackjack?' do 
 		it 'returns true if either player has blackjack' do 
 			allow(player).to receive(:score).and_return(21)
@@ -30,13 +40,13 @@ describe Game do
 		end
 	end
 
-	describe '#deal' do 
+	describe '#play_on' do 
 		context 'Player card total less than 17' do 
 			it 'should deal another card to players hand' do 
 				allow(player).to receive(:over_limit).and_return(false)
 				expect(subject.player).to receive(:add_card)
 				expect(subject.dealer).not_to receive(:add_card)
-				subject.deal
+				subject.play_on
 			end
 		end
 
@@ -45,13 +55,13 @@ describe Game do
 				allow(player).to receive(:over_limit).and_return(true)
 				allow(dealer).to receive(:score).and_return(12)
 				expect(subject.dealer).to receive(:add_card)
-				subject.deal
+				subject.play_on
 			end
 			it 'should not deal another card to players hand' do 
 				allow(player).to receive(:over_limit).and_return(true)
 				allow(dealer).to receive(:score).and_return(12)
 				expect(subject.player).not_to receive(:add_card)
-				subject.deal
+				subject.play_on
 			end
 		end
 	end
