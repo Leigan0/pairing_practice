@@ -6,14 +6,13 @@ class Game
 	attr_reader :player, :dealer, :card_class
 	BLACKJACK = 21 
 
-	def initialize(player_class, card_class)
-		@player_class = player_class
+	def initialize(player, dealer, card_class)
 		@card_class = card_class.new
-		@player = @player_class.new(@card_class.release_card, @card_class.release_card) 
-		@dealer = @player_class.new(@card_class.release_card, @card_class.release_card)	
+		@player = player
+		@dealer = dealer
 	end
 
-	def winner?
+	def blackjack?
 		@player.score == BLACKJACK || @dealer.score == BLACKJACK
 	end
 
@@ -24,5 +23,7 @@ class Game
 	def game_over?
 		@player.score > BLACKJACK || @dealer.score > BLACKJACK
 	end
+
+
 
 end

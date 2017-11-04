@@ -5,8 +5,8 @@ class Player
 
 	LIMIT = 17
 
-	 def initialize(c1,c2)
-	 	@cards = [c1,c2]
+	 def initialize
+	 	@cards = []
 	 end
 
 	 def add_card(card)
