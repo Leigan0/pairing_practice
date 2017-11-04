@@ -20,4 +20,8 @@ class Game
 		@player.over_limit ? @dealer.add_card(@card_class.release_card) : @player.add_card(@card_class.release_card)
 	end
 
+	def game_over?
+		@player.over_black_jack || @dealer.over_black_jack
+	end
+
 end

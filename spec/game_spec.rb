@@ -60,4 +60,17 @@ describe Game do
 
 	end
 
+	describe '#game_over?' do 
+		it 'player either over blackjack limit returns true' do 
+			allow(player).to receive(:over_black_jack).and_return(true)
+			expect(subject.game_over?).to eq true
+		end
+
+		it 'player either over blackjack limit returns true' do 
+			allow(player).to receive(:over_black_jack).and_return(false)
+			expect(subject.game_over?).to eq false
+		end
+		
+	end
+
 end
