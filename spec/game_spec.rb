@@ -6,7 +6,6 @@ describe Game do
 	let(:card_class){double :card_class, new: deck}
 	let(:deck) {double :deck, release_card: card}
 	let(:player){double :player, add_card: card}
-	let(:dealer){double :dealer}
 	subject{Game.new(player_class, card_class)}
 
 	describe '#initialize' do 
@@ -24,8 +23,7 @@ describe Game do
 		# 	expect(card_class).to receive(:release_card).and_return(:card) 
 		# 	expect(card_class).to receive(:release_card).and_return(:card)  
 		# end
-
-		#need to work on with prince - already initialized when tests run. 
+		#need to work on this - already initialized when tests run - unsure how to test / if i need to?
 	end
 
 	describe '#winner?' do 
@@ -36,7 +34,6 @@ describe Game do
 
 		it 'returns false both either players does not have blackjack' do 
 			allow(player).to receive(:black_jack).and_return(false)
-			allow(dealer).to receive(:black_jack).and_return(false)
 			expect(subject.winner?).to eq false
 		end
 	end
@@ -45,31 +42,20 @@ describe Game do
 		context 'Player card total less than 17' do 
 			it 'should deal another card to players hand' do 
 				allow(player).to receive(:over_limit).and_return(false)
-				expect(player).to receive(:add_card)
+				expect(subject.player).to receive(:add_card)
+				expect(subject.dealer).not_to receive(:add_card)
 				subject.deal
 			end
-			it 'should not deal to dealer' do 
-				allow(player).to receive(:over_limit).and_return(false)
-				expect(dealer).not_to receive(:add_card)
-				subject.deal
-			end 
 		end
 
 		context 'Player card total more than 17, dealers hand less than players' do 
 			it 'should deal another card to dealers hand' do
-				allow(player).to receive(:over_limit).and_return(false)
-				allow(player).to receive(:total).and_return(18)
-				allow(dealer).to receive(:total).and_return(17)
-				expect(dealer).to receive(:add_card)
+				allow(player).to receive(:over_limit).and_return(true)
+				expect(subject.dealer).to receive(:add_card)
+				expect(subject.player).not_to receive(:add_card)
 				subject.deal
 			end
-			it 'should not deal to player' do 
-				allow(player).to receive(:over_limit).and_return(false)
-				allow(player).to receive(:total).and_return(18)
-				allow(dealer).to receive(:total).and_return(17)
-				expect(player).not_to receive(:add_card)
-				subject.deal
-			end 
+			#discuss this? is this actually testing this? player and dealer are same double so diffcult to test / separate ?
 		end
 
 	end
