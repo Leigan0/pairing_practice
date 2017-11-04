@@ -41,9 +41,15 @@ describe Game do
 	end
 
 	describe '#play_on' do 
+		it 'raises error message if either players hand over 21' do 
+			allow(dealer).to receive(:score).and_return(22)
+			expect{ subject.play_on }.to raise_error(RuntimeError, "Game over")
+		end
+
 		context 'Player card total less than 17' do 
 			it 'should deal another card to players hand' do 
 				allow(player).to receive(:over_limit).and_return(false)
+				allow(dealer).to receive(:score).and_return(12)
 				expect(subject.player).to receive(:add_card)
 				expect(subject.dealer).not_to receive(:add_card)
 				subject.play_on
@@ -81,15 +87,25 @@ describe Game do
 
 	describe '#game_over?' do 
 		it 'if player either over blackjack limit returns true' do 
-			allow(player).to receive(:score).and_return(22)
+			allow(dealer).to receive(:score).and_return(22)
 			expect(subject.game_over?).to eq true
 		end
 
 		it 'returns false if both players score under blackjack limit' do 
-			allow(player).to receive(:score).and_return(18)
 			allow(dealer).to receive(:score).and_return(18)
 			expect(subject.game_over?).to eq false
 		end
 	end
 
+	describe '#winner' do 
+		it 'returns player if has dealer score above 21' do 
+			allow(dealer).to receive(:score). and_return(22)
+			expect(subject.winner).to eq [player]
+		end
+
+		it 'returns dealer if dealer score below 21 but higher than players' do 
+			allow(dealer).to receive(:score). and_return(20)
+			expect(subject.winner).to eq dealer
+		end
+	end
 end

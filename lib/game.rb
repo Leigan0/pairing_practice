@@ -22,6 +22,7 @@ class Game
 	end
 
 	def play_on
+		fail "Game over" if game_over?
 		@player.over_limit ? dealers_move : @player.add_card(@card_class.release_card)
 	end
 
@@ -34,7 +35,14 @@ class Game
 		@dealer.add_card(@card_class.release_card)
 	end
 
-
-
+	def winner
+		if game_over? 
+			[player,dealer].select {|p| p.score < BLACKJACK}
+		elsif @player.score < @dealer.score
+			dealer
+		else
+			player
+		end
+	end
 
 end

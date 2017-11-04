@@ -12,8 +12,8 @@ Basic rules
 User stories
 
 • As a player and dealer, so I can play the game, I need to be given two cards from a deck
-• As player of the game, I need to know if I have blackjack in my initial hand, so I can win the game
-• As a player, I need to know if the dealer has black jack in their initial hand, so I know the game is over
+• As player of the game, I need to know my score, so I can win the game
+• As a player, I need to know if the dealer has black jack, so I know the game is over
 • As a player, so the game can continue, I need to be able to draw cards from the deck
 • As a player, so I know what move to make next, I need to know the score of my hand
 • As a player, so I know if I have lost the game, a score of 21 or over should end the game 
