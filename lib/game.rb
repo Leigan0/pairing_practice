@@ -17,7 +17,7 @@ class Game
 	end
 
 	def deal
-		@player.over_limit ? @dealer.add_card(@card_class.release_card) : @player.add_card(@card_class.release_card)
+		@player.over_limit ? dealers_move : @player.add_card(@card_class.release_card)
 	end
 
 	def game_over?
