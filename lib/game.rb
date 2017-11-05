@@ -3,46 +3,66 @@ require_relative 'card'
 
 class Game 
 
-	attr_reader :player, :dealer, :card_class
-	BLACKJACK = 21 
+BLACKJACK = 21
 
+	attr_reader :player, :dealer, :card_class
+	
 	def initialize(player, dealer, card_class)
-		@card_class = card_class.new
+		@card_class = card_class
 		@player = player
 		@dealer = dealer
 	end
 
-	def deal_game
-		2.times{ @player.add_card(@card_class.release_card)
-		@dealer.add_card(@card_class.release_card)}
+	def deal_game(num_of_cards)
+		num_of_cards.times { 
+			@player.add_card(@card_class.release_card)
+			@dealer.add_card(@card_class.release_card)
+		}
 	end
 
-	def blackjack?
-		@player.score == BLACKJACK || @dealer.score == BLACKJACK
+	def player_turn
+		deal_to_player
+		dealer_turn
 	end
 
-	def play_on
-		fail "Game over" if game_over?
-		@player.over_limit ? dealers_move : @player.add_card(@card_class.release_card)
+	def deal_to_player
+		while !@player.over_limit do 
+			@player.add_card(@card_class.release_card)
+		end
 	end
 
-	def game_over?
-		@player.score > BLACKJACK || @dealer.score > BLACKJACK
+	def dealer_turn
+		game_over(@player) ? finish("Dealer wins player score #{@player.score}, dealer score #{@dealer.score}") : @deal_to_dealer
+		winner
 	end
 
-	def dealers_move
-		fail "Dealers hand exceeds players" if @player.score < @dealer.score
-		@dealer.add_card(@card_class.release_card)
+	def deal_to_dealer
+		while @player.score > @dealer.score
+			@dealer.add_card(@card_class.release_card)
+		end
 	end
 
 	def winner
-		if game_over? 
-			[player,dealer].select {|p| p.score < BLACKJACK}
+		if game_over(@dealer)
+			finish("Player wins player score #{player.score}, dealer score #{dealer.score}")
 		elsif @player.score < @dealer.score
-			dealer
+			finish("Dealer wins #{player.score}, dealer score #{dealer.score}")
 		else
-			player
+			finish("Dealer wins player score #{player.score}, dealer score #{dealer.score}")
 		end
+	end
+
+	def finish(message)
+		puts message
+		exit
+	end
+
+	def blackjack
+		@player.score == BLACKJACK || @dealer.score == BLACKJACK
+	end
+
+	def game_over(player)
+		player.score > BLACKJACK
 	end
 
 end
