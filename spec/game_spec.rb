@@ -42,12 +42,18 @@ describe Game do
 				allow(player).to receive(:over_limit).and_return(false,false,true)
 				expect(player).to receive(:add_card).exactly(2).times
 				subject.deal_to_player
-			end 
+			end
+
 		end
-		context 'Player card score is less than player limit' do 
+		context 'Player card score is higher than player limit' do 
 			it 'Does not deal a further card to player' do 
 				allow(player).to receive(:over_limit).and_return(true)
 				expect(player).not_to receive(:add_card)
+				subject.deal_to_player
+			end
+			it 'calls method dealer_turn once player score over limit' do 
+				allow(player).to receive(:over_limit).and_return(false,true)
+				expect(player).to receive(:score)
 				subject.deal_to_player
 			end
 		end
@@ -74,6 +80,11 @@ describe Game do
 				expect(dealer).not_to receive(:add_card)
 				subject.deal_to_dealer
 			end
+				it 'calls method winner once dealer score is higher than players' do 
+				allow(dealer).to receive(:score).and_return(20)
+				expect(dealer).to receive(:score)
+				subject.deal_to_dealer
+			end
 		end
 	end 
 
@@ -84,7 +95,7 @@ describe Game do
 				expect(subject.dealer_turn).to eq "Dealer wins player score #{player.score}, dealer score #{dealer.score}"
 			end
 		end
-		context 'Players score is under blackjack' do 
+		context 'Players score is under blackjack, but higher than players' do 
 			it 'calls #deal_to_dealer method' do 
 				allow(dealer).to receive(:score).and_return(12,20)
 				expect(dealer).to receive(:add_card)
@@ -108,7 +119,6 @@ describe Game do
 		end
 		context 'Both player and dealer have same score' do 
 			it 'Ends game and returns dealer as winner' do 
-				allow(dealer).to receive(:score).and_return(18)
 				expect(subject.winner).to eq "Dealer wins player score #{player.score}, dealer score #{dealer.score}"
 			end
 		end
@@ -124,7 +134,7 @@ describe Game do
 		end
 	end
 
-	describe '#finish' do 
+	describe '#complete' do 
 		it 'returns message given as a parameter' do 
 			expect(subject.complete('Bye')).to eq 'Bye'
 		end
