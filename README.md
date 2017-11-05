@@ -23,6 +23,7 @@ Two computer players play the game. Player and Dealer. Both the player and deale
 * As a dealer, so I know if I have lost, a score of 21 or over should end the game
 * As players, so we know who has won, the game should confirm which player has won
 
+
 ## Usage
 
 # Getting started 
