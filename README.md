@@ -7,7 +7,7 @@ Two computer players play the game. Player and Dealer. Both the player and deale
 * Numbered cards are their point values
 * Jack, Queen and King count as 10
 * Ace counts as 11
-* Black Jack refers to 21 being reach with two cards only 
+* Black Jack refers to 21 being reached with two cards only 
 
 ## User stories
 
