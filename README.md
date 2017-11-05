@@ -30,6 +30,13 @@ Two computer players play the game. Player and Dealer. Both the player and deale
  * git clone https://github.com/Leigan0/beat-the-dealer-21
  * cd beat_the_dealer_21
  * bundle install
+ * To play the game:
+ * irb
+ * require './lib/game_runner.rb'
+ * game = GameRunner.new
+ * game.play_game - creates a new game, which can be repeated
+ * to exit game - game.end_game
+
 
 #### Running Tests
 rspec
