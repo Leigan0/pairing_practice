@@ -26,15 +26,15 @@ Two computer players play the game. Player and Dealer. Both the player and deale
 
 ## Usage
 
-# Getting started 
+### Getting started 
  * git clone https://github.com/Leigan0/beat-the-dealer-21
  * cd beat_the_dealer_21
  * bundle install
 
-# Running Tests
+#### Running Tests
 rspec
 
-# Technologies used
+#### Technologies used
 rspec
 ruby
 
