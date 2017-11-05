@@ -6,10 +6,22 @@ class GameRunner
 
 INITIAL_HAND = 2 
 
-	def play_game
-		@game = Game.new(Player.new, Player.new,Card)
-		@game.deal_game(INITIAL_HAND)
-		blackjack ? @game.winner : @game.player_turn
-	end
+attr_reader :game, :game_class,:player_class,:card_class
 	
+	def initialize(game_class, player_class, card_class)
+		@game_class = game_class
+		@player_class = player_class
+		@card_class = card_class
+	end
+
+	def play_game
+		@game = @game_class.new(@player_class.new, @player_class.new,@card_class.new)
+		@game.deal_game(INITIAL_HAND)
+		@game.blackjack ? @game.winner : @game.deal_to_player
+	end
+
+	def end_game
+		exit
+	end
+
 end

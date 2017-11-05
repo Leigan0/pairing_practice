@@ -23,6 +23,22 @@ User stories
 • As a dealer, so I know if I have lost, a score of 21 or over should end the game
 • As players, so we know who has won, the game should confirm which player has won
 
+## Usage
+
+# Getting started 
+ * git clone https://github.com/Leigan0/beat-the-dealer-21
+ * cd beat_the_dealer_21
+ * bundle install
+
+# Running Tests
+rspec
+
+# Technologies used
+rspec
+ruby
+
+
+
 
 
 

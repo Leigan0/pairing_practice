@@ -4,7 +4,7 @@ describe Game do
 	let(:card) {double :card}
 	let(:card_class){double :card_class, release_card: card}
 	let(:player){double :player, add_card: card, score: 18}
-	let(:dealer){double :dealer, add_card: card}
+	let(:dealer){double :dealer, add_card: card, score: 18}
 	subject{Game.new(player, dealer, card_class)}
 
 	describe '#initialize' do 
@@ -32,7 +32,6 @@ describe Game do
 		end
 
 		it 'returns false both either players does not have blackjack' do 
-			allow(dealer).to receive(:score).and_return(18)
 			expect(subject.blackjack).to eq false
 		end
 	end
@@ -62,6 +61,13 @@ describe Game do
 				subject.deal_to_dealer
 			end
 		end
+
+		context 'Players score is equal to dealers' do 
+			it 'does not deal another card to dealer' do 
+				expect(dealer).not_to receive(:add_card)
+				subject.deal_to_dealer
+			end
+		end
 		context 'Dealers score is higher than players' do
 			it 'does not deal a card to dealer' do 
 				allow(dealer).to receive(:score).and_return(20)
@@ -75,9 +81,15 @@ describe Game do
 		context 'Players score is over blackjack' do
 			it 'ends game and confirms dealer has won - no further cards dealt to dealer' do
 				allow(player).to receive(:score).and_return(22)
-				allow(dealer).to receive(:score).and_return(12)
-				expect(subject.dealer_turn).to eq "Dealer wins player score #{@player.score}, dealer score #{@dealer.score}"
+				expect(subject.dealer_turn).to eq "Dealer wins player score #{player.score}, dealer score #{dealer.score}"
 			end
+		end
+		context 'Players score is under blackjack' do 
+			it 'calls #deal_to_dealer method' do 
+				allow(dealer).to receive(:score).and_return(12,20)
+				expect(dealer).to receive(:add_card)
+				subject.dealer_turn
+			end 
 		end
 	end
 
@@ -85,13 +97,19 @@ describe Game do
 		context 'Players score under 21, dealers score over 21' do 
 			it 'Ends game and confirms player is the winner' do 
 				allow(dealer).to receive(:score).and_return(22)
-				expect(subject.winner).eq "Player wins player score #{@player.score}, dealer score #{@dealer.score}"
+				expect(subject.winner).to eq "Player wins player score #{player.score}, dealer score #{dealer.score}"
 			end 
 		end
 		context 'Both under 21 dealers score is more than players score' do 
 			it 'Ends game and confirms dealer is the winner' do 
 				allow(dealer).to receive(:score).and_return(20)
-				expect(subject.winner).eq "Dealer wins player score #{@player.score}, dealer score #{@dealer.score}"
+				expect(subject.winner).to eq "Dealer wins player score #{player.score}, dealer score #{dealer.score}"
+			end
+		end
+		context 'Both player and dealer have same score' do 
+			it 'Ends game and returns dealer as winner' do 
+				allow(dealer).to receive(:score).and_return(18)
+				expect(subject.winner).to eq "Dealer wins player score #{player.score}, dealer score #{dealer.score}"
 			end
 		end
 	end
@@ -108,10 +126,7 @@ describe Game do
 
 	describe '#finish' do 
 		it 'returns message given as a parameter' do 
-			expect(subject.finish('Bye')).to eq 'Bye'
+			expect(subject.complete('Bye')).to eq 'Bye'
 		end
-		it 'exits the app' do 
-			expect { subject.finish('Bye') }.to raise_error(SystemExit)
-		end 
 	end
 end

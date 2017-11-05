@@ -1,5 +1,3 @@
-require_relative 'player'
-require_relative 'card'
 
 class Game 
 
@@ -20,49 +18,43 @@ BLACKJACK = 21
 		}
 	end
 
-	def player_turn
-		deal_to_player
-		dealer_turn
+	def blackjack
+		@player.score == BLACKJACK || @dealer.score == BLACKJACK
 	end
 
 	def deal_to_player
 		while !@player.over_limit do 
 			@player.add_card(@card_class.release_card)
 		end
+		dealer_turn
 	end
 
 	def dealer_turn
-		game_over(@player) ? finish("Dealer wins player score #{@player.score}, dealer score #{@dealer.score}") : @deal_to_dealer
-		winner
+		game_over(@player) ? complete("Dealer wins player score #{@player.score}, dealer score #{@dealer.score}") : deal_to_dealer
 	end
 
 	def deal_to_dealer
 		while @player.score > @dealer.score
 			@dealer.add_card(@card_class.release_card)
 		end
+		winner
 	end
 
 	def winner
 		if game_over(@dealer)
-			finish("Player wins player score #{player.score}, dealer score #{dealer.score}")
+			complete("Player wins player score #{player.score}, dealer score #{dealer.score}")
 		elsif @player.score < @dealer.score
-			finish("Dealer wins #{player.score}, dealer score #{dealer.score}")
+			complete("Dealer wins player score #{player.score}, dealer score #{dealer.score}")
 		else
-			finish("Dealer wins player score #{player.score}, dealer score #{dealer.score}")
+			complete("Dealer wins player score #{player.score}, dealer score #{dealer.score}") #This covers when both have matching score
 		end
-	end
-
-	def finish(message)
-		puts message
-		exit
-	end
-
-	def blackjack
-		@player.score == BLACKJACK || @dealer.score == BLACKJACK
 	end
 
 	def game_over(player)
 		player.score > BLACKJACK
 	end
 
+	def complete(message)
+		message
+	end
 end
