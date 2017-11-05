@@ -46,7 +46,7 @@ BLACKJACK = 21
 		elsif @player.score < @dealer.score
 			complete("Dealer wins player score #{player.score}, dealer score #{dealer.score}")
 		else
-			complete("Dealer wins player score #{player.score}, dealer score #{dealer.score}") #This covers when both have matching score
+			complete("Dealer wins player score #{player.score}, dealer score #{dealer.score}") 
 		end
 	end
 

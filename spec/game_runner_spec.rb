@@ -7,7 +7,7 @@ describe GameRunner do
 	let(:card_class){double :card_class, new: card}
 	let(:player_class){double :player_class, new: player}
 	let(:game_class){double :game_class, new: game}
-	subject { GameRunner.new(game_class,player_class,card_class)}
+	subject { GameRunner.new(game_class: game_class,player_class: player_class,card_class: card_class)}
 
 	describe '#play_game' do 
 		it 'creates a new game object' do 
@@ -35,8 +35,6 @@ describe GameRunner do
 			subject.play_game
 		end
 	end
-
-
 
 	it 'exits the app' do 
 			expect { subject.end_game }.to raise_error(SystemExit)

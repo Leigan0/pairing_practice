@@ -8,7 +8,7 @@ INITIAL_HAND = 2
 
 attr_reader :game, :game_class,:player_class,:card_class
 	
-	def initialize(game_class, player_class, card_class)
+	def initialize(game_class: Game, player_class: Player, card_class: Card)
 		@game_class = game_class
 		@player_class = player_class
 		@card_class = card_class
