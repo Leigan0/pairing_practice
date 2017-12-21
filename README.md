@@ -45,6 +45,7 @@ rspec
 rspec
 ruby
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/0795d822b2de56cf0957/maintainability)](https://codeclimate.com/github/Leigan0/beat-the-dealer-21/maintainability)
 
 
 
