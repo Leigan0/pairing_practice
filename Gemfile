@@ -8,3 +8,5 @@ gem "rake"
 group :development, :test do
   gem "rspec"
 end
+
+gem 'coveralls', require: false
