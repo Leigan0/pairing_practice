@@ -1,3 +1,8 @@
+
+#Blackjack App [![Maintainability](https://api.codeclimate.com/v1/badges/0795d822b2de56cf0957/maintainability)](https://codeclimate.com/github/Leigan0/beat-the-dealer-21/maintainability)
+[![Build Status](https://travis-ci.org/Leigan0/beat-the-dealer-21.svg?branch=master)](https://travis-ci.org/Leigan0/beat-the-dealer-21)
+
+
 I have created a simple automated card game of can you beat the dealer at 21.
 
 Two computer players play the game. Player and Dealer. Both the player and dealer will be given two cards from a shuffled deck. I have attempted to implement the solution using TDD.
@@ -44,6 +49,3 @@ rspec
 #### Technologies used
 rspec
 ruby
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/0795d822b2de56cf0957/maintainability)](https://codeclimate.com/github/Leigan0/beat-the-dealer-21/maintainability)
-[![Build Status](https://travis-ci.org/Leigan0/beat-the-dealer-21.svg?branch=master)](https://travis-ci.org/Leigan0/beat-the-dealer-21)
