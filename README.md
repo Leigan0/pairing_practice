@@ -1,12 +1,6 @@
 
 # Beat the dealer 21  
-[![Maintainability](https://api.codeclimate.com/v1/badges/0795d822b2de56cf0957/maintainability)](https://codeclimate.com/github/Leigan0/beat-the-dealer-21/maintainability)
-[![Build Status](https://travis-ci.org/Leigan0/beat-the-dealer-21.svg?branch=master)](https://travis-ci.org/Leigan0/beat-the-dealer-21) [![Coverage Status](https://coveralls.io/repos/github/Leigan0/beat-the-dealer-21/badge.svg?branch=master)](https://coveralls.io/github/Leigan0/beat-the-dealer-21?branch=master)
 
-
-I have created a simple automated card game of can you beat the dealer at 21.
-
-Two computer players play the game. Player and Dealer. Both the player and dealer will be given two cards from a shuffled deck. I have attempted to implement the solution using TDD.
 
 
 ## Basic rules
@@ -35,14 +29,8 @@ Two computer players play the game. Player and Dealer. Both the player and deale
 ### Getting started
  * git clone https://github.com/Leigan0/beat-the-dealer-21
  * cd beat_the_dealer_21
+ * install bundle
  * bundle install
- * To play the game:
- * irb
- * require './lib/game_runner.rb'
- * game = GameRunner.new
- * game.play_game - creates a new game, which can be repeated
- * to exit game - game.end_game
-
 
 #### Running Tests
 rspec
