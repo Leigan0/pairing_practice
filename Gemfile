@@ -1,10 +1,9 @@
 
 source "https://rubygems.org"
 
-ruby "2.4.1"
+ruby "2.3.7"
 
 gem "rake"
-gem 'coveralls', require: false
 
 group :development, :test do
   gem "rspec"
